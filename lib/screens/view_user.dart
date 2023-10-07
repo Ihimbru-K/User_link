@@ -11,6 +11,26 @@ class ViewUser extends StatefulWidget {
 class _ViewUserState extends State<ViewUser> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final double screenHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("Add User"),
+          centerTitle: true,
+
+        ),
+        body: Container(
+         // padding: EdgeInsets.all(12),
+          child: Column(
+            children: [
+              Text("Name"),
+              Text("ID"),
+              Text("Contact"),
+              Text("Description"),
+
+
+            ],
+          ),)
+
+    );
   }
 }
