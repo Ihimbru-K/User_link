@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         userModel.name = user['name'];
         userModel.contact = user['contact'];
         userModel.description = user['description'];
+        userList.add(userModel);
 
       });
     });
@@ -31,6 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    getAllUsers();
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -38,9 +44,30 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
 
       ),
-      body: Container(
+      body: ListView.builder(
+        itemCount: userList.length,
+
+        itemBuilder: (context,index){
+          return Card(
+            child: ListTile(onTap: (){},
+            leading: Icon(Icons.people),
+              title: Text(userList[index].name ?? ''),
+              subtitle: Text(userList[index].name ?? ''),
+              trailing: Row(
+                children: [
+                  IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+                  IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+                ],
+              ),
+              
+            ),
+
+          );
+        },
+
 
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){},),
     );
   }
 }
