@@ -58,7 +58,7 @@ class _EditUserState extends State<EditUser> {
               SizedBox(height: screenHeight*0.08,),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(onPressed: (){}, child: const Text("Save")),
+                  ElevatedButton(onPressed: (){}, child: const Text("Update")),
                   const SizedBox(width: 10,),
                   ElevatedButton(onPressed: (){}, child: const Text("Reset"))
                 ],)
