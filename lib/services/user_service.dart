@@ -15,7 +15,7 @@ saveUser(User user)async{
     return await _repository.insertData('users', user.userMap());
 }
 //read all user records
-  readAllUsersData(User user)async{
+  readAllUsersData()async{
     return await _repository.readData('users');
   }
 
