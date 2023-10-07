@@ -15,7 +15,7 @@ class _AddUserState extends State<AddUser> {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text("SQLite CRUD App"),
+        title: const Text("Add User"),
         centerTitle: true,
 
       ),
