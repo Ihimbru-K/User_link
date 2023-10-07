@@ -60,7 +60,7 @@ class _AddUserState extends State<AddUser> {
             children: [
             ElevatedButton(onPressed: (){}, child: const Text("Save")),
             const SizedBox(width: 10,),
-            ElevatedButton(onPressed: (){}, child: const Text("Save"))
+            ElevatedButton(onPressed: (){}, child: const Text("Reset"))
           ],)
         ],
       ),)
