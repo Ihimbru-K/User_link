@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:user/services/user_service.dart';
 
 
 
@@ -10,6 +11,15 @@ class AddUser extends StatefulWidget {
 }
 
 class _AddUserState extends State<AddUser> {
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController contactController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+
+  var _userService = UserService();
+
+
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
@@ -24,6 +34,7 @@ class _AddUserState extends State<AddUser> {
         child: Column(
         children: [
           TextField(
+            controller: nameController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10)
@@ -35,6 +46,7 @@ class _AddUserState extends State<AddUser> {
           ),
           SizedBox(height: screenHeight*0.08,),
           TextField(
+            controller: contactController,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10)
@@ -46,6 +58,7 @@ class _AddUserState extends State<AddUser> {
           ),
           SizedBox(height: screenHeight*0.08,),
           TextField(
+            controller: descriptionController,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10)
