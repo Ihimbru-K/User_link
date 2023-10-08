@@ -1,29 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:user/models/user.dart';
+import 'package:user/services/user_service.dart';
 
 
 
 class EditUser extends StatefulWidget {
-  const EditUser({Key? key}) : super(key: key);
+  const EditUser({Key? key, required this.user}) : super(key: key);
 
   @override
   State<EditUser> createState() => _EditUserState();
 }
 
 class _EditUserState extends State<EditUser> {
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController contactController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+
+  var _userService = UserService();
+
+
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Edit User"),
+          title: const Text("Add User"),
           centerTitle: true,
 
         ),
         body: Container(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
             children: [
               TextField(
+                controller: nameController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)
@@ -35,6 +47,7 @@ class _EditUserState extends State<EditUser> {
               ),
               SizedBox(height: screenHeight*0.08,),
               TextField(
+                controller: contactController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)
@@ -46,6 +59,7 @@ class _EditUserState extends State<EditUser> {
               ),
               SizedBox(height: screenHeight*0.08,),
               TextField(
+                controller: descriptionController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)
@@ -58,7 +72,14 @@ class _EditUserState extends State<EditUser> {
               SizedBox(height: screenHeight*0.08,),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(onPressed: (){}, child: const Text("Update")),
+                  ElevatedButton(onPressed: (){
+                    setState(() {
+                      saveData();
+
+
+                    });
+
+                  }, child: const Text("Save")),
                   const SizedBox(width: 10,),
                   ElevatedButton(onPressed: (){}, child: const Text("Reset"))
                 ],)
@@ -67,4 +88,16 @@ class _EditUserState extends State<EditUser> {
 
     );
   }
+
+  Future saveData() async {
+    var _user = User();
+    _user.name = nameController.text;
+    _user.contact = contactController.text;
+    _user.description = descriptionController.text;
+
+    var result = await _userService.saveUser(_user);
+    Navigator.pop(context, result);
+
+  }
 }
+
