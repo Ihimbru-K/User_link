@@ -19,7 +19,7 @@ class _ViewUserState extends State<ViewUser> {
 
         ),
         body: Container(
-         // padding: EdgeInsets.all(12),
+         /// padding: EdgeInsets.all(12),
           child: Column(
             children: [
               Text("Name"),
