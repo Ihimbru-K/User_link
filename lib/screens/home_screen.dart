@@ -1,5 +1,8 @@
+import 'dart:js_interop_unsafe';
+
 import 'package:flutter/material.dart';
 import 'package:user/models/user.dart';
+import 'package:user/screens/add_user.dart';
 import 'package:user/services/user_service.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,6 +40,37 @@ class _HomeScreenState extends State<HomeScreen> {
     getAllUsers();
     super.initState();
   }
+
+  _showSnackBar(String message){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content : Text(message)),);
+  }
+
+  deleteDataDialog(BuildContext context, userId){
+    return showDialog(
+      context: context,
+      builder: (param){
+        return AlertDialog(
+          title: Text("Are you sure you want to delete it?"),
+          actions: [
+            TextButton(onPressed: () async{
+              var result = await userService.deleteUser(userId);
+              setState(() {
+                if(result != null){
+                  Navigator.pop(context);
+                  getAllUsers();
+                  _showSnackBar("User has been deleted!");
+                }
+              });
+
+            }, child: Text("Delete"))
+          ],
+        );
+      }
+    );
+  }
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -53,12 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
             leading: Icon(Icons.people),
               title: Text(userList[index].name ?? ''),
               subtitle: Text(userList[index].name ?? ''),
-              trailing: Row(
+              trailing: SizedBox(
+                width: 150,
+                child:  Row(
                 children: [
                   IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
                   IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
                 ],
-              ),
+              ),)
               
             ),
 
@@ -67,7 +103,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){},),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AddUser()),);
+      },
+
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

@@ -25,7 +25,7 @@ saveUser(User user)async{
   }
 
   //Delete user
-  deletUser(userId)async{
+  deleteUser(userId)async{
     return await _repository.deleteDataById('users', userId);
   }
 

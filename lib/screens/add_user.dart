@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:user/models/user.dart';
 import 'package:user/services/user_service.dart';
 
 
@@ -30,7 +31,7 @@ class _AddUserState extends State<AddUser> {
 
       ),
       body: Container(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
         children: [
           TextField(
@@ -71,7 +72,14 @@ class _AddUserState extends State<AddUser> {
           SizedBox(height: screenHeight*0.08,),
           Row(mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            ElevatedButton(onPressed: (){}, child: const Text("Save")),
+            ElevatedButton(onPressed: (){
+              setState(() {
+                saveData();
+
+
+              });
+
+            }, child: const Text("Save")),
             const SizedBox(width: 10,),
             ElevatedButton(onPressed: (){}, child: const Text("Reset"))
           ],)
@@ -80,4 +88,16 @@ class _AddUserState extends State<AddUser> {
 
     );
   }
+
+  Future saveData() async {
+  var _user = User();
+  _user.name = nameController.text;
+  _user.contact = contactController.text;
+  _user.description = descriptionController.text;
+
+  var result = await _userService.saveUser(_user);
+  Navigator.pop(context, result);
+
 }
+}
+

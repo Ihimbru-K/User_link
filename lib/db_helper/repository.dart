@@ -1,6 +1,7 @@
 
-import 'database_connection.dart';
+//import 'database_connection.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:user/db_helper/database_connection.dart';
 
 class Repository{
 
