@@ -45,14 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content : Text(message)),);
   }
 
-  deleteDataDialog(BuildContext context, userId){
+  _deleteDataDialog(BuildContext context, userId){
     return showDialog(
       context: context,
       builder: (param){
         return AlertDialog(
           title: Text("Are you sure you want to delete it?"),
           actions: [
-            TextButton(onPressed: () async{
+            ElevatedButton(onPressed: () async{
               var result = await userService.deleteUser(userId);
               setState(() {
                 if(result != null){
@@ -62,7 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               });
 
-            }, child: Text("Delete"))
+            }, child: Text("Delete")),
+            ElevatedButton(onPressed: (){Navigator.pop(context);}, child: Text("Cancel"))
           ],
         );
       }
@@ -92,7 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child:  Row(
                 children: [
                   IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.delete)),
+                  IconButton(onPressed: (){
+                    _deleteDataDialog(context, userList[index].id);
+                  }, icon: Icon(Icons.delete)),
                 ],
               ),)
               
