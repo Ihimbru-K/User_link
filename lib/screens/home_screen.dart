@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:user/models/user.dart';
 import 'package:user/screens/add_user.dart';
 import 'package:user/services/user_service.dart';
-import 'package:user/screens/edit_user.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -93,12 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 150,
                 child:  Row(
                 children: [
-                  IconButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>EditUser()),);
-                   // Navigator.of(context).push((context)=> MaterialPageRoute(builder: EditUser()));
-                   // Navigator.push((context) => MaterialPageRoute(builder: EditUser()))
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>EditUser(user: null,),))
-                  }, icon: Icon(Icons.edit)),
+                  IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
                   IconButton(onPressed: (){
                     _deleteDataDialog(context, userList[index].id);
                   }, icon: Icon(Icons.delete)),
