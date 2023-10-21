@@ -1,6 +1,6 @@
 # user
 
-A new Flutter projec
+A new Flutter project
 
 ## Getting Started
 
